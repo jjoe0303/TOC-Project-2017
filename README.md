@@ -45,17 +45,54 @@ python3 app.py
 ![fsm](./img/show-fsm.png)
 
 ## Usage
-The initial state is set to `user`.
+The initial state is set to `help`.
+State description:`
+	help:initial state, where you can ask bot for help.
+	state1:repeat mode, bot will repeat what you said until you say **go back**.
+	state2:image mode, bot will give you some "text" url that link to google image, type **show fsm** will give you a fsm picture from your webhook address/show-fsm, it will return to `help` whenever you say **go back**
+	state3:dictionary mode, type some words, it will return you a link to "word's online dictionary",**go back** make you back to `help`
+	state4 + state5:doctor mode , it will recommend you clinics around NCKU with its information , if you think it helpful,enter **yes** and return to `help` , you can also enter **no** then it will recommend again
+	
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+* help
+	* Input: "repeat after me"
+		* Reply: "OK~ I will repeat what you said"
 
-* user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
+	* Input: "search image for me"
+		* Reply: "Which image you're looking for ??"
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "dictionary"
+		* Reply: "Which word you want to look up ?"
+
+	* Input: "i feel sick"
+		* Reply: "You should go to see a doctor, my dear"
+		* Reply: "I suggest..."
+		* Reply: "The recommend clinic's information"
+		* Reply: "Helpful?"
+*state1
+	* Input: "go back"
+		* go back to help state
+	* Input: "xxx"
+		* Reply: "xxx"
+*state2
+	* Input: "go back"
+		* go back to help state
+	* Input: "show fsm"
+		* Reply: "Your URL/show-fsm"
+	* Input: "xxx"
+		* Reply: google image website search xxx
+*state3
+	* Input: "go back"
+		* go back to help state
+	* Input: "xxx"
+		* Reply: xxx dictionary web page
+*state4 + state5
+	* Input: "yes"
+		* Return to help state
+	* Input: "no"
+		* Back to state4 and recommend again
 
 
-## Author
+##Co-Auther
+[JUI-LUNG,HUNG](https://github.com/jjoe0303)
 [Lee-W](https://github.com/Lee-W)

@@ -75,7 +75,7 @@ class TocMachine(GraphMachine):
         print('Leaving state2')
        	
     def on_enter_state3(self, update):
-        update.message.reply_text("Which word you want to search for ?")
+        update.message.reply_text("Which word you want to look up ?")
        # self.go_back(update)
    
     def is_back_state3(self, update):
