@@ -8,16 +8,18 @@ from fsm import TocMachine
 
 
 API_TOKEN = '516086289:AAGYa09-ZFZRd-bQoKgC37NcOZ81hE8KtfA'
-WEBHOOK_URL = 'https://96e06baf.ngrok.io/hook'
+WEBHOOK_URL = 'https://98747bff.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
 machine = TocMachine(
     states=[
 		'help',
-        'state1',
-        'state2',
-		'state3'
+        'state1', #repeat
+        'state2', #image
+		'state3', #dictionary
+		'state4', #clinic
+		'state5'  #clinic helpful?
     ],
     transitions=[
 		{
@@ -37,6 +39,13 @@ machine = TocMachine(
             'source': 'help',
             'dest': 'state3',
             'conditions': 'is_going_to_state3'
+        },
+
+		{
+            'trigger': 'advance',
+            'source': 'help',
+            'dest': 'state4',
+            'conditions': 'is_going_to_state4'
         },
 
         {
@@ -60,10 +69,23 @@ machine = TocMachine(
 			'conditions':'is_back_state3'
 		},
 
+        {
+		    'trigger':'advance',
+			'source':'state5',
+			'dest':'help',
+			'conditions':'is_back_state5'
+		},
+
+		{
+			'trigger':'advance',
+			'source':'state4',
+			'dest':'state5'
+		},
+
 		{
 			'trigger':'go_back',
-			'source':'state3',
-			'dest':'help'
+			'source':'state5',
+			'dest':'state4'
 		}
     ],
     initial='help',
