@@ -53,12 +53,12 @@ machine = TocMachine(
 			'conditions':'is_back_state2'
 		},
 
-#        {
-#		    'trigger':'advance',
-#			'source':'state3',
-#			'dest':'help',
-#			'conditions':'is_back_state3'
-#		}
+        {
+		    'trigger':'advance',
+			'source':'state3',
+			'dest':'help',
+			'conditions':'is_back_state3'
+		},
 
 		{
 			'trigger':'go_back',
