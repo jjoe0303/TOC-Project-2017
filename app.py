@@ -7,8 +7,8 @@ from flask import Flask, request, send_file
 from fsm import TocMachine
 
 
-API_TOKEN = 'Your Telegram API Token'
-WEBHOOK_URL = 'Your Webhook URL'
+API_TOKEN = '541641202:AAH2_ZEMoea0Bb9mq-qMf2XuM9wIrj9APxQ'
+WEBHOOK_URL = 'https://42ce3766.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
@@ -16,7 +16,8 @@ machine = TocMachine(
     states=[
         'user',
         'state1',
-        'state2'
+        'state2',
+	'state3'
     ],
     transitions=[
         {
@@ -32,10 +33,17 @@ machine = TocMachine(
             'conditions': 'is_going_to_state2'
         },
         {
+            'trigger': 'advance',
+            'source': 'user',
+            'dest': 'state3',
+            'conditions': 'is_going_to_state3'
+        },
+        {
             'trigger': 'go_back',
             'source': [
                 'state1',
-                'state2'
+                'state2',
+		'state3'
             ],
             'dest': 'user'
         }
